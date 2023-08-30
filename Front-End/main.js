@@ -16,7 +16,7 @@
             
             console.log(itemData);
 
-            fetch('URL_DO_SEU_BACKEND', {
+            fetch('http://localhost:5000/cadastrar', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -24,7 +24,7 @@
                 body: JSON.stringify(itemData),
             })
             .then(response => {
-                if (response.ok) {
+                if (response.status === 201) {
                     console.log('Item cadastrado com sucesso!');
                 } else {
                     console.error('Erro ao cadastrar o item.');
