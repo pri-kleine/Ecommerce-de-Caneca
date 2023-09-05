@@ -1,0 +1,3 @@
+GO
+
+SELECT * FROM Produtos
