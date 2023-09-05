@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const sql = require('mssql');
 const PORT = 5000;
 
 app.use(cors());
@@ -8,18 +9,27 @@ app.use(express.json());
 
 var Connection = require('tedious').Connection;  
     var config = {  
-        server: 'DESKTOP-0EFMBNU\SQLEXPRESS',  //update me
+        server: 'DESKTOP-VCFCMNE',  //update me
         authentication: {
             type: 'default',
             options: {
-                userName: 'sa2', //update me
-                password: 'sa2'  //update me
+                userName: 'sa', //update me
+                password: 'michele'  //update me
             }
         },
         options: {
             // If you are on Microsoft Azure, you need encryption:
             encrypt: true,
-            database: 'Canecas'
+            database: 'Canecas'},
+        };
+  
+        sql.connect(config)
+        .then(() => {
+        console.log('Conexão bem-sucedida com o banco de dados SQL Server');
+        })
+        .catch((err) => {
+        console.error('Erro ao conectar ao banco de dados:', err);
+        });        
 
 let createItems = [];
 let idCounter = 1;
