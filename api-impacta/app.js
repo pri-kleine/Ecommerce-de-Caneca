@@ -4,59 +4,74 @@ const cors = require('cors');
 const sql = require('mssql');
 const PORT = 5000;
 
+var Connection = require('tedious').Connection
+
 app.use(cors());
 app.use(express.json());
 
-var Connection = require('tedious').Connection;  
-    var config = {  
-        server: 'DESKTOP-VCFCMNE',  //update me
-        authentication: {
-            type: 'default',
-            options: {
-                userName: 'sa', //update me
-                password: 'michele'  //update me
-            }
-        },
-        options: {
-            // If you are on Microsoft Azure, you need encryption:
-            encrypt: true,
-            database: 'Canecas'},
-        };
-  
-        sql.connect(config)
-        .then(() => {
-        console.log('Conexão bem-sucedida com o banco de dados SQL Server');
-        })
-        .catch((err) => {
-        console.error('Erro ao conectar ao banco de dados:', err);
-        });        
+const config = {
+  server: 'DESKTOP-0EFMBNU\\SQLEXPRESS',
+  user: 'sa2',
+  password: 'sa2',
+  database: 'Canecas',
+  options: {
+    encrypt: false, // Se você estiver usando criptografia (recomendado para conexões remotas)
+  },
+};
 
-let createItems = [];
-let idCounter = 1;
+app.post('/cadastrar', async (req, res) => {
+  const { NomedoProduto, Descricao, Quantidade, PrecoUnitario } = req.body;
 
-// Create
-app.post('/cadastrar', (req, res) => {
-  const { NomedoProduto, Descricao, Quantidade,
-    PrecoUnitario } = req.body;
-  const createItem = {
-    Codigo: idCounter++,
-    NomedoProduto,
-    Descricao,
-    Quantidade,
-    PrecoUnitario
-  };
-  createItems.push(createItem);
-  console.log(createItem); // na versão de entrega, retirar console.log
-  res.status(201).json(createItem);
+  try {
+    await sql.connect(config);
+    console.log(sql.connect());
+    const request = new sql.Request();
+
+    // Execute uma instrução SQL de inserção na sua tabela
+
+    const query = `
+  INSERT INTO Produtos (Nome, Descricao, QTD, Preco)
+  VALUES (@NomedoProduto, @Descricao, @Quantidade, @PrecoUnitario);
+`;
+
+    request.input('NomedoProduto', sql.VarChar, NomedoProduto);
+    request.input('Descricao', sql.VarChar, Descricao);
+    request.input('Quantidade', sql.Int, Quantidade);
+    request.input('PrecoUnitario', sql.Decimal, PrecoUnitario);
+    // request.input('Total', sql.Decimal, PrecoUnitario * QTD);
+
+    const result = await request.query(query);
+    console.log(result);
+
+
+    res.status(201).json(result.recordset[0]); // Retorna o item criado
+  } catch (error) {
+    console.error('Erro ao inserir item no banco de dados:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  } finally {
+    sql.close();
+  }
+  console.log('Fim da operação');
 });
 
-// Read
-app.get('/buscar', (req, res) => {
-  res.json(createItems);
+app.get('/buscar', async (req, res) => {
+  try {
+    await sql.connect(config);
+    const request = new sql.Request();
+
+    // Execute uma instrução SQL de seleção na sua tabela
+    const query = 'SELECT * FROM sua_tabela;';
+    const result = await request.query(query);
+
+    res.json(result.recordset); // Retorna os itens do banco de dados
+  } catch (error) {
+    console.error('Erro ao buscar itens no banco de dados:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  } finally {
+    sql.close();
+  }
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
-
-
