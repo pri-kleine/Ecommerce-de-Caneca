@@ -14,13 +14,14 @@ const config = {
   user: 'sa2',
   password: 'sa2',
   database: 'Canecas',
+  port: 1433,
   options: {
     encrypt: false, // Se você estiver usando criptografia (recomendado para conexões remotas)
   },
 };
 
 app.post('/cadastrar', async (req, res) => {
-  const { NomedoProduto, Descricao, Quantidade, PrecoUnitario } = req.body;
+  const { NomedoProduto, Descricao, Quantidade, PrecoUnitario, Total } = req.body;
 
   try {
     await sql.connect(config);
@@ -30,15 +31,15 @@ app.post('/cadastrar', async (req, res) => {
     // Execute uma instrução SQL de inserção na sua tabela
 
     const query = `
-  INSERT INTO Produtos (Nome, Descricao, QTD, Preco)
-  VALUES (@NomedoProduto, @Descricao, @Quantidade, @PrecoUnitario);
+  INSERT INTO Produtos (Nome, Descricao, QTD, Preco, Total)
+  VALUES (@NomedoProduto, @Descricao, @Quantidade, @PrecoUnitario, @Total);
 `;
 
     request.input('NomedoProduto', sql.VarChar, NomedoProduto);
     request.input('Descricao', sql.VarChar, Descricao);
     request.input('Quantidade', sql.Int, Quantidade);
-    request.input('PrecoUnitario', sql.Decimal, PrecoUnitario);
-    // request.input('Total', sql.Decimal, PrecoUnitario * QTD);
+    request.input('PrecoUnitario', sql.Float, PrecoUnitario);
+    request.input('Total', sql.Float, Total);
 
     const result = await request.query(query);
     console.log(result);
