@@ -19,7 +19,7 @@ const config = {
 };
 
 app.post('/cadastrar', async (req, res) => {
-  const { NomedoProduto, Descricao, Quantidade, PrecoUnitario, Total } = req.body;
+  const { NomedoProduto, Descricao, Quantidade, PrecoUnitario} = req.body;
 
   try {
     await sql.connect(config);
@@ -28,13 +28,12 @@ app.post('/cadastrar', async (req, res) => {
     // Execute uma instrução SQL de inserção na sua tabela
 
     const query = `
-  INSERT INTO Produtos (Nome, Descricao, QTD, Preco, Total)
+  INSERT INTO Produtos (Nome, Descricao, QTD, Preco)
   VALUES ('${NomedoProduto}', '${Descricao}', ${Quantidade}, 
-  ${PrecoUnitario}, ${Total});
+  ${PrecoUnitario});
 `;
 
     const result = await request.query(query);
-
     const query2 = 'SELECT TOP 1 * FROM Produtos ORDER BY Codigo DESC;';
     const result2 = await request.query(query2);
 

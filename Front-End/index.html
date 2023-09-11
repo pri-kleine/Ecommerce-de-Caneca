@@ -15,40 +15,7 @@
     <h2>Cadastro de Produtos</h2>
     </header>
     
-<!-- <script>
-    function cadastrarItem() {
-            var nome = document.getElementById("nome").value;
-            var valor = document.getElementById("valor").value;
-
-            var itemData = { Nome: nome, Valor: valor };
-
-            fetch('http://127.0.0.1:5000/products', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(itemData),
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Item cadastrado com sucesso!');
-                } else {
-                    console.error('Erro ao cadastrar o item.');
-                }
-            })
-            .catch(error => {
-                console.error('Erro na requisição:', error);
-            });
-        }
-</script> -->
-    <nav>
-    <!-- colocar aqui o direcionamento para outra pagina -->
-    </nav>
-
     <div id="cadastroRegistro">
-        <!-- <div class="codigo">Código</div>
-        <input type = 'number' id="codigo"/> -->
-        
         <div class="nomeProduto">Nome do Produto</div>
         <input type = 'text' id='nomeProduto'/>
 
@@ -63,7 +30,6 @@
 
         <div>
         <button onclick="cadastrarItem()">Cadastrar</button>
-        <!-- <button onclick="vizualizar ('lista')" class="cinza"> Cancelar</button>-->
         </div>
     </div>
 
