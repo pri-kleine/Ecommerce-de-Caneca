@@ -19,7 +19,7 @@ const config = {
 };
 
 app.post('/cadastrar', async (req, res) => {
-  const { NomedoProduto, Descricao, Quantidade, PrecoUnitario} = req.body;
+  const { NomedoProduto, Descricao, Quantidade, PrecoUnitario } = req.body;
 
   try {
     await sql.connect(config);
@@ -47,16 +47,17 @@ app.post('/cadastrar', async (req, res) => {
   console.log('Fim da operação');
 });
 
-app.get('/buscar', async (req, res) => {
+app.post('/buscar', async (req, res) => {
   try {
     await sql.connect(config);
     const request = new sql.Request();
+    const { NomedoProduto} = req.body;
+    console.log (req.body);
 
-    // Execute uma instrução SQL de seleção na sua tabela
-    const query = 'SELECT * FROM sua_tabela;';
-    const result = await request.query(query);
+    const query2 = `SELECT * FROM Produtos WHERE Nome LIKE '%${NomedoProduto}%'`;
+    const result2 = await request.query(query2);
 
-    res.json(result.recordset); // Retorna os itens do banco de dados
+    res.status(200).json(result2.recordset); // Retorna os itens do banco de dados
   } catch (error) {
     console.error('Erro ao buscar itens no banco de dados:', error);
     res.status(500).json({ error: 'Erro interno do servidor' });
