@@ -1,7 +1,7 @@
 # Ecommerce-de-Caneca
 
 
-Projeto Ecommerce de Caneca - Disciplina Software Software Product: Analysis, Specification, Projec
+Projeto Cadastro de Produto - Disciplina Software Software Product: Analysis, Specification, Projec
 Faculdade Impacta - 5o Bimestre 2023.
 
 
@@ -9,12 +9,10 @@ Faculdade Impacta - 5o Bimestre 2023.
    Linguagem HTML/ CSS / JavaScript
 
 - Back-End:
-   Linguagem: Python
+   Linguagem: NodeJS com Express
 
 - Banco de Dados:
-   Linguagem:
-
-
+   Linguagem: MS Server
 
 
 
@@ -31,16 +29,13 @@ Bruno Vieira de Oliveira	 RM 1510102 - EAD ADS - 5B
 Bruno Martins de Paiva RA: 2102684 - EAD ADS - 5B
 
 Escopo:
-Carrinho de compras de Ecommerce caneca
-
+Cadastro de Produtos
 
 Requisitos:
-update - alterar quantidade de produto no carrinho de compra;
-delete  - excluir produto no carrinho de compras;
-create - adiciona o produto ao carrinho;
-read - carrinho de compras em si.
-
-
+create - O sistema deve poder cadastrar um novo produto no sistema
+read - O sistema deve poder consultar os produtos cadastrados no sistema. 
+update - O sistema deve poder atualizar os produtos já cadastrados no sistema
+delete - O sistema deve poder excluir o produto já cadastrado no sistema.
 
 
 
