@@ -10,31 +10,57 @@
 </head>
 
 
-<body>
+<body page='cadastro'>
+    <div id="cadastroRegistro">
+
     <header>
     <h2>Cadastro de Produtos</h2>
     </header>
     
-    <div id="cadastroRegistro">
-        <div class="nomeProduto">Nome do Produto</div>
-        <input type = 'text' id='nomeProduto'/>
+    <div class="nomeProduto">Nome do Produto</div>
+    <input type = 'text' id='nomeProduto'/>
 
-        <div class="descricao">Descrição do Produto</div>
-        <input type = 'text' id='descricao'/>
+    <div class="descricao">Descrição do Produto</div>
+    <input type = 'text' id='descricao'/>
 
-        <div class="quantidade">Quantidade</div>
-        <input type="number" id='quantidade'/>
+    <div class="quantidade">Quantidade</div>
+    <input type="number" id='quantidade'/>
 
-        <div class="precoUnitario">Preço Unitário</div>
-        <input type="number" id='precoUnitario'/>
+    <div class="precoUnitario">Preço Unitário</div>
+    <input type="number" id='precoUnitario'/>
 
-        <div>
-        <button onclick="cadastrarItem()">Cadastrar</button>
-        </div>
-
-        <div>
-        <button onclick="buscarItem()">Buscar</button>
-        </div>
+    <div>
+    <button onclick="cadastrarItem()">Cadastrar</button>
+    <!-- <button onclick="buscarItem()">Buscar</button> -->
+    <button onclick="buscarItem('lista')"class = "azul" type="button">Buscar</button>
     </div>
+</div>
+
+<div id='listaRegistros'>
+    <header>
+        <h2>Listar Produtos</h2>
+    </header>
+
+    <div style='display: flex;'>
+        <input style='flex:1' placeholder="PESQUISAR" autofocus id='inputPesquisa' />
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome do Produto</th>
+                <th>Descrição do Produto</th>
+                <th>Quantidade</th>
+                <th>Preço Unitário</th>
+            </tr>
+        </thead>
+        <tbody id='listaRegistrosBody'></tbody>
+    </table>
+
+    <div>
+        <button onclick="buscarItem('cadastro')">Novo Cadastro</button>
+    </div>
+
+</div>
 </body>
 </html>

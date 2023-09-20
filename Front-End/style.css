@@ -1,3 +1,12 @@
+#cadastroRegistro{ display: none; }
+#listaRegistros{
+display: none;
+flex-direction: column;
+gap: 30px;
+}
+
+body[page=cadastro] #cadastroRegistro{ display: block; }
+body[page=lista] #listaRegistros{ display: flex;}
 
     body{
         font-family: Arial, Helvetica, sans-serif;
@@ -24,9 +33,9 @@
         margin: 3px;
         padding: 10px 15px;
     }
-    button.cinza{
-        background-color: #ccc;
-        color: #666;
+    button.azul{
+        background-color: #07a;
+        color: #fff;
     }
     button:hover{
         opacity: 0.8;

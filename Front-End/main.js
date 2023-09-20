@@ -33,7 +33,8 @@
             });
         }
 
-        function buscarItem() {
+        function buscarItem(pagina) {
+            document.body.setAttribute('page',pagina)
             var nomedoProduto = document.getElementById("nomeProduto").value;
             console.log(nomedoProduto);
 
@@ -56,4 +57,6 @@
                 console.error('Erro na requisição:', error);
             });
         }
+
+
 
