@@ -1,12 +1,3 @@
-#cadastroRegistro{ display: none; }
-#listaRegistros{
-display: none;
-flex-direction: column;
-gap: 30px;
-}
-
-body[page=cadastro] #cadastroRegistro{ display: block; }
-body[page=lista] #listaRegistros{ display: flex;}
 
     body{
         font-family: Arial, Helvetica, sans-serif;
