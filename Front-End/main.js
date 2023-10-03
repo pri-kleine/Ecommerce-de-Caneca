@@ -33,30 +33,30 @@ function cadastrarItem() {
         });
 }
 
-// function buscarItem(pagina) {
-//     document.body.setAttribute('page',pagina)
-//     var nomedoProduto = document.getElementById("nomeProduto").value;
-//     console.log(nomedoProduto);
+function buscarItem(pagina) {
+    document.body.setAttribute()
+    var nomedoProduto = document.getElementById("nomeProduto").value;
+    console.log(nomedoProduto);
 
-//     fetch('http://localhost:5000/buscar', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({NomedoProduto: nomedoProduto}),
-//     })
-//     .then(response => {
-//         if (response.status === 201) {
-//             console.log('Item buscado com sucesso!');
-//             console.log(nomedoProduto);
-//         } else {
-//             console.error('Erro ao buscar o item.');
-//         }
-//     })
-//     .catch(error => {
-//         console.error('Erro na requisição:', error);
-//     });
-// }
+    fetch('http://localhost:5000/buscar', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({NomedoProduto: nomedoProduto}),
+    })
+    .then(response => {
+        if (response.status === 201) {
+            console.log('Item buscado com sucesso!');
+            console.log(nomedoProduto);
+        } else {
+            console.error('Erro ao buscar o item.');
+        }
+    })
+    .catch(error => {
+        console.error('Erro na requisição:', error);
+    });
+}
 
 // Código JavaScript para a tela de listagem (em listagem.html)
 document.getElementById("listarButton").addEventListener("click", function () {
