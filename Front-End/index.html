@@ -31,36 +31,11 @@
 
     <div>
     <button onclick="cadastrarItem()">Cadastrar</button>
-    <!-- <button onclick="buscarItem()">Buscar</button> -->
-    <button onclick="buscarItem('lista')"class = "azul" type="button">Buscar</button>
+    <button class = "azul" type="button">
+        <a href="listagem.html"> Busca </a>
+    </button> 
     </div>
 </div>
 
-<div id='listaRegistros'>
-    <header>
-        <h2>Listar Produtos</h2>
-    </header>
-
-    <div style='display: flex;'>
-        <input style='flex:1' placeholder="PESQUISAR" autofocus id='inputPesquisa' />
-    </div>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Nome do Produto</th>
-                <th>Descrição do Produto</th>
-                <th>Quantidade</th>
-                <th>Preço Unitário</th>
-            </tr>
-        </thead>
-        <tbody id='listaRegistrosBody'></tbody>
-    </table>
-
-    <div>
-        <button onclick="buscarItem('cadastro')">Novo Cadastro</button>
-    </div>
-
-</div>
 </body>
 </html>
