@@ -14,7 +14,7 @@ const config = {
   database: 'Canecas',
   port: 1433,
   options: {
-    encrypt: false, // Se você estiver usando criptografia (recomendado para conexões remotas)
+    encrypt: false, 
   },
 };
 
@@ -24,8 +24,6 @@ app.post('/cadastrar', async (req, res) => {
   try {
     await sql.connect(config);
     const request = new sql.Request();
-
-    // Execute uma instrução SQL de inserção na sua tabela
 
     const query = `
   INSERT INTO Produtos (Nome, Descricao, QTD, Preco)
@@ -54,10 +52,15 @@ app.post('/buscar', async (req, res) => {
     const { NomedoProduto} = req.body;
     console.log (req.body);
 
-    const query2 = `SELECT * FROM Produtos WHERE Nome LIKE '%${NomedoProduto}%'`;
-    const result2 = await request.query(query2);
-
-    res.status(200).json(result2.recordset); // Retorna os itens do banco de dados
+    let query;
+    if (NomedoProduto){
+      query = `SELECT * FROM Produtos WHERE Nome LIKE '%${NomedoProduto}%'`;
+    } else {
+      query = `SELECT * FROM Produtos`;
+    }
+    const result = await request.query(query);
+    console.log('HA', result.recordset);
+    res.status(200).json(result.recordset); // Retorna os itens do banco de dados
   } catch (error) {
     console.error('Erro ao buscar itens no banco de dados:', error);
     res.status(500).json({ error: 'Erro interno do servidor' });

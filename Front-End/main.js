@@ -1,5 +1,4 @@
 
-
 function cadastrarItem() {
     var nomedoProduto = document.getElementById("nomeProduto").value;
     var descricao = document.getElementById("descricao").value;
@@ -33,44 +32,45 @@ function cadastrarItem() {
         });
 }
 
-function buscarItem(pagina) {
-    document.body.setAttribute()
+function buscarItem() {
     var nomedoProduto = document.getElementById("nomeProduto").value;
-    console.log(nomedoProduto);
 
     fetch('http://localhost:5000/buscar', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({NomedoProduto: nomedoProduto}),
+        body: JSON.stringify({ NomedoProduto: nomedoProduto }),
     })
     .then(response => {
-        if (response.status === 201) {
-            console.log('Item buscado com sucesso!');
-            console.log(nomedoProduto);
+        if (response.status === 200) {
+            return response.json();
         } else {
             console.error('Erro ao buscar o item.');
+            return [];
+        }
+    })
+    .then(data => {
+        const tabelaProdutos = document.getElementById('tabelaProdutos');
+        tabelaProdutos.innerHTML = ''; // Limpa a tabela antes de adicionar os novos dados
+
+        if (data.length === 0) {
+            tabelaProdutos.innerHTML = '<tr><td colspan="4">Nenhum produto encontrado.</td></tr>';
+        } else {
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.Nome}</td>
+                    <td>${item.Descricao}</td>
+                    <td>${item.QTD}</td>
+                    <td>${item.Preco}</td>
+                `;
+                tabelaProdutos.appendChild(row);
+            });
         }
     })
     .catch(error => {
         console.error('Erro na requisição:', error);
-    });
+    });
 }
-
-// Código JavaScript para a tela de listagem (em listagem.html)
-document.getElementById("listarButton").addEventListener("click", function () {
-    // Aqui você pode adicionar a lógica para listar os produtos cadastrados.
-    // Você pode recuperar os dados de onde os armazenou (por exemplo, de um array).
-
-    // Após listar os produtos, você pode preencher a tabela com os dados.
-
-    alert("Listagem de produtos.");
-});
-
-document.getElementById("voltarButton").addEventListener("click", function () {
-    // Redirecionar de volta para a tela de cadastro
-    window.location.href = "index.html";
-});
-
 
