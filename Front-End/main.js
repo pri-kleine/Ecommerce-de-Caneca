@@ -60,10 +60,12 @@ function buscarItem() {
             data.forEach(item => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${item.Nome}</td>
-                    <td>${item.Descricao}</td>
-                    <td>${item.QTD}</td>
-                    <td>${item.Preco}</td>
+                    <td id= 'valor_nome${item.Nome}'>${item.Nome}</td>
+                    <td id= 'valor_descricao${item.Nome}'>${item.Descricao}</td>
+                    <td id= 'valor_QTD${item.Nome}'>${item.QTD}</td>
+                    <td id= 'valor_Preco${item.Nome}'>${item.Preco}</td>
+                    <td> <button type='button' id='botao_editar${item.Nome}' onclick='editar_registro( )'>Editar</button> </td>
+                    <td> <button type='button' id='botao_salvar${item.Nome}'>Salvar</button> </td>
                 `;
                 tabelaProdutos.appendChild(row);
             });
@@ -74,3 +76,7 @@ function buscarItem() {
     });
 }
 
+function editar_registro(valor_nome$){
+    console.log('Acessou o editar:' + valor_nome$)
+    // document.getElementById('valor id'+ nomedoProduto);
+};
