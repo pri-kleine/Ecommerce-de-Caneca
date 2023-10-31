@@ -69,6 +69,26 @@ app.post('/buscar', async (req, res) => {
   }
 });
 
+app.post('/editar', async (req, res) => {
+  try {
+    await sql.connect(config);
+    const request = new sql.Request();
+    const { Codigo, Quantidade} = req.body;
+    console.log (req.body);
+
+    let query;
+    query = `UPDATE Produtos SET QTD=${Quantidade} WHERE Codigo = ${Codigo}`
+    console.log("Query " + query);
+    await request.query(query);
+    res.status(202).json({});
+  } catch (error) {
+    console.error('Erro ao editar quantidade no banco de dados:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  } finally {
+    sql.close();
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

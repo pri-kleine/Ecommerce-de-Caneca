@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet"  type="text/css" href="./style.css">
     <title>Lista de Produtos</title>
-    <script src="main.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
 </head>
 
 <div class="nomeProduto">Nome do Produto</div>
@@ -22,7 +23,7 @@
         <h2>Listar Produtos</h2>
     </header>
 
-       <table>
+       <table class="tabelaEditavel">
         <thead>
             <tr>
                 <th>Nome do Produto</th>
@@ -31,9 +32,15 @@
                 <th>Preço Unitário</th>
             </tr>
         </thead>
-        <tbody id='tabelaProdutos'></tbody>
+        <tbody id='tabelaProdutos'>
+
+                        
+        </tbody>
         <!-- Aqui os dados dos produtos cadastrados serão inseridos pelo JavaScript -->
     </table>
+    <div>
+
+    </div>
 
     <div>
         <button id="voltarButton"> <a href="index.html"> Volta para Novo Cadastro</a> </button>

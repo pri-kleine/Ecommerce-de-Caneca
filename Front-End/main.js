@@ -62,11 +62,12 @@ function buscarItem() {
                 row.innerHTML = `
                     <td>${item.Nome}</td>
                     <td>${item.Descricao}</td>
-                    <td>${item.QTD}</td>
+                    <td id="${item.Codigo}">${item.QTD}</td>
                     <td>${item.Preco}</td>
                 `;
                 tabelaProdutos.appendChild(row);
             });
+            makeEditable()
         }
     })
     .catch(error => {
@@ -74,3 +75,42 @@ function buscarItem() {
     });
 }
 
+function sendNewValue(codigo, quantidade) {
+    fetch('http://localhost:5000/editar', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ Codigo: codigo, Quantidade: quantidade}),
+    })
+}
+
+function makeEditable () {
+    $("td").dblclick(function () {
+        var conteudoOriginal = $(this).text();
+        var itemID = $(this).attr("id");
+        if (itemID === undefined) {
+            return;
+        }
+        console.log("E ai??? " + itemID);
+        
+        $(this).addClass("celulaEmEdicao");
+        $(this).html("<input type='text' value='" + conteudoOriginal + "' />");
+        $(this).children().first().focus();
+
+        $(this).children().first().keypress(function (e) {
+            if (e.which == 13) {
+                var novoConteudo = $(this).val();
+                $(this).parent().text(novoConteudo);
+                $(this).parent().removeClass("celulaEmEdicao");
+                console.log("Codigo " + itemID + " Editado para " + novoConteudo);
+                sendNewValue(itemID, novoConteudo);
+            }
+        });
+
+	$(this).children().first().blur(function(){
+		$(this).parent().text(conteudoOriginal);
+		$(this).parent().removeClass("celulaEmEdicao");
+	});
+    });
+};
