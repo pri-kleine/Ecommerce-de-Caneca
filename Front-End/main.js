@@ -64,6 +64,7 @@ function buscarItem() {
                     <td>${item.Descricao}</td>
                     <td id="${item.Codigo}">${item.QTD}</td>
                     <td>${item.Preco}</td>
+                    <td><button onclick="deletarCodigo(${item.Codigo})"> Deletar</button></td>
                 `;
                 tabelaProdutos.appendChild(row);
             });
@@ -114,3 +115,14 @@ function makeEditable () {
 	});
     });
 };
+
+function deletarCodigo(Codigo) {
+    console.log('passou aqui no Deletão');
+    fetch(`http://localhost:5000/deletar:${Codigo}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        // body: JSON.stringify({ Codigo: codigo, Quantidade: quantidade}),
+    })
+}

@@ -89,6 +89,27 @@ app.post('/editar', async (req, res) => {
   }
 });
 
+app.delete('/deletar:Codigo', async (req, res) => {
+  try {
+    await sql.connect(config);
+    const request = new sql.Request();
+    const { Codigo } = req.params;
+
+    let query = `DELETE FROM Produtos WHERE Codigo = ${Codigo}`;
+    
+    console.log("Query: " + query);
+
+    await request.query(query);
+    res.status(204).json({});
+  } catch (error) {
+    console.error('Erro ao deletar registro no banco de dados:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  } finally {
+    sql.close();
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
